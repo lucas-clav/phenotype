@@ -1,0 +1,219 @@
+/* =================================== COLORS & VARIABLES =================================== */
+:root {
+    --margin-size: 50px;
+    --color-light: #fff;
+    --color-dark: #000;
+    --color-grey: #7d7d7d;
+}
+
+/* --- Font Definitions --- */
+@font-face {
+    font-family: 'Movement';
+    src: url('Fonts/Movement-DirectThin.otf') format('opentype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Diatype Regular';
+    src: url('Fonts/ABCDiatype-Regular-Trial.otf') format('opentype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Diatype Light';
+    src: url('Fonts/ABCDiatype-Light-Trial.otf') format('opentype');
+    font-weight: 300;
+}
+
+/* =================================== BASE STYLES & STICKY FOOTER FIX =================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* 🔑 STICKY FOOTER FIX: Enable Flexbox to manage vertical space */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+    margin: var(--margin-size);
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+/* Allows the main content area to grow and push the footer down */
+main {
+    flex-grow: 1;
+}
+
+/* =================================== TYPE SYSTEM CLASSES =================================== */
+
+.h1-style, .p1-style, .p2-style {
+    margin: 0; 
+}
+
+.h1-style {
+    font-family: 'Movement', sans-serif;
+    font-size: 32pt;
+    line-height: 32pt;
+    font-weight: 300;
+    margin-bottom: 16px; 
+}
+
+.h2-style {
+    font-family: 'Movement', sans-serif;
+    font-size: 20pt;
+    line-height: 20pt;
+    font-weight: 300;
+    margin: 0;
+}
+
+.p1-style {
+    font-family: 'Diatype Regular', sans-serif;
+    font-size: 14pt;
+    line-height: 14pt;
+    margin-bottom: 8px; 
+    color: var(--color-grey);
+}
+
+.p2-style {
+    font-family: 'Diatype Light', sans-serif;
+    font-size: 12pt;
+    line-height: 18pt;
+    margin-bottom: 24px; 
+}
+
+.p2-footer {
+    font-family: 'Diatype Light', sans-serif;
+    font-size: 12pt;
+    line-height: 12pt;
+    margin: 0;
+}
+
+/* =================================== NAVIGATION BAR =================================== */
+
+header {
+    margin-bottom: var(--margin-size);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: var(--color-light);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #aaa;
+}
+
+.nav-title,
+.nav-about {
+    font-family: 'Movement', sans-serif;
+    font-size: 20pt;
+    line-height: 20pt;
+    font-weight: 300;
+}
+
+/* =================================== SKETCH GRID (4x2 Layout) - HOME PAGE =================================== */
+
+.sketch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: min-content;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 80px;
+    
+    flex-grow: 1; 
+}
+
+.sketch-container {
+    /* ✅ FIX: Use Flex container for vertical stacking of text + iframe */
+    display: flex;
+    flex-direction: column; 
+    position: relative; 
+    
+    /* ❌ REMOVED: Aspect Ratio Box properties */
+    height: auto; 
+    padding-bottom: 0; 
+}
+
+/* ❌ REMOVED: .sketch-text-overlay styles (since the text is now outside the overlay) */
+
+/* --- iFrame Styling --- */
+.sketch-container iframe {
+    /* ✅ FIX: iframe now follows the text and maintains its 1:1 ratio */
+    position: static;
+    width: 100%;
+    
+    aspect-ratio: 1 / 1;
+    border: none;
+    background-color: #333;
+    display: block; 
+}
+
+/* =================================== ABOUT PAGE LAYOUT =================================== */
+
+#about-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr; 
+    height: 100%;     
+    margin-top: 240px; 
+    gap: 20px;
+}
+
+.about-title {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin-bottom: 0px;
+}
+
+.about-content {
+    grid-column: 2 / 2;
+    max-width: 660px; 
+    margin: 0; 
+    grid-row: 1 / 2;
+}
+
+/* =================================== FOOTER STYLING =================================== */
+
+footer {
+    /* 🔑 STICKY FOOTER FIX: Pushes the footer to the bottom */
+    margin-top: auto; 
+    
+    text-align: left;
+    left: 0;
+    bottom: 0;
+    border-top: 1px solid var(--color-light);
+    padding-top: 24px;
+    padding-bottom: 24px;
+    color: var(--color-light);
+    font-family: 'Diatype Light', sans-serif;
+    font-size: 12pt;
+}
+
+/* =================================== RESPONSIVENESS (Media Queries) =================================== */
+
+@media (max-width: 1200px) {
+    .sketch-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --margin-size: 20px;
+    }
+
+    .sketch-grid {
+        grid-template-columns: 1fr;
+    }
+}
